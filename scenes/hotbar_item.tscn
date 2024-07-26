@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0yo7r3rrb64g"]
+
+[ext_resource type="Theme" uid="uid://chydmyy0v7xmu" path="res://assets/theme.tres" id="1_0y6gp"]
+[ext_resource type="Script" path="res://scripts/hotbar_item.gd" id="2_wtski"]
+
+[node name="HotbarItem" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_0y6gp")
+script = ExtResource("2_wtski")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Amount" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "1x"
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Name"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

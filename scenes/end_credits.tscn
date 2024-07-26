@@ -1,0 +1,172 @@
+[gd_scene load_steps=7 format=3 uid="uid://chf7l8ong7f0x"]
+
+[ext_resource type="Script" path="res://scripts/end_credits.gd" id="1_4fi6w"]
+[ext_resource type="Theme" uid="uid://chydmyy0v7xmu" path="res://assets/theme.tres" id="1_sfao3"]
+
+[sub_resource type="Animation" id="Animation_allu4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ev3id"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4hdmh"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wla3a"]
+_data = {
+"RESET": SubResource("Animation_allu4"),
+"fade_in": SubResource("Animation_ev3id"),
+"fade_out": SubResource("Animation_4hdmh")
+}
+
+[node name="EndCredits" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_4fi6w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sfao3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]
+
+
+
+
+[font_size=50]Twilight Trials[/font_size]
+
+
+
+
+Programming -- Eric Schuette
+
+Art -- Eric Schuette
+
+Design -- Eric Schuette
+
+Playtesting -- Jason Schuette,
+Sam Schuette, and the rest of
+my amazing family
+
+
+
+
+Created by Eric Schuette as part of the
+2024 Pirate Game Jam
+
+Copyright (c) 2024 Eric Schuette
+All rights reserved
+
+See the [url=https://github.com/SeaRaptor21/twilight-trials]GitHub repositiory[/url]
+or [url=https://seapython.itch.io/twilight-trials]Itch.io page[/url] for more
+licensing information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[font_size=30]Thank you for playing[/font_size]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[/center]"
+
+[node name="FadeToBlack" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlack"]
+libraries = {
+"": SubResource("AnimationLibrary_wla3a")
+}
+autoplay = "fade_in"
+
+[connection signal="child_entered_tree" from="Control/RichTextLabel" to="." method="_on_rich_text_label_child_entered_tree"]
+[connection signal="animation_finished" from="FadeToBlack/AnimationPlayer" to="." method="_on_fade_finished"]

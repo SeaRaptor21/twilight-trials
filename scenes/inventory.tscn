@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw6ic246syroa"]
+
+[ext_resource type="Theme" uid="uid://chydmyy0v7xmu" path="res://assets/theme.tres" id="1_w80v8"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="2_0gu0q"]
+[ext_resource type="Script" path="res://scripts/inventory_drag_drop.gd" id="3_7ewwt"]
+
+[node name="Inventory" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_w80v8")
+script = ExtResource("2_0gu0q")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 1052.0
+offset_bottom = 548.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter Inventory Items"
+
+[node name="Close" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Close"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 285)
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+script = ExtResource("3_7ewwt")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hotbar"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Hotbar" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+theme_override_constants/separation = 25
+script = ExtResource("3_7ewwt")
+
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]

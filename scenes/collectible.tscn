@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://dco4l4p4xi8vq"]
+
+[ext_resource type="Script" path="res://scripts/collectible.gd" id="1_j7jet"]
+[ext_resource type="Texture2D" uid="uid://ct4ccqyin6k1i" path="res://assets/kenney-1-bit-platformer/Tiles/Transparent/tile_0002.png" id="2_aqqmh"]
+
+[sub_resource type="Animation" id="Animation_olofg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fe71e"]
+resource_name = "collect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4trkl"]
+resource_name = "collectible"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0uw1x"]
+_data = {
+"RESET": SubResource("Animation_olofg"),
+"collect": SubResource("Animation_fe71e"),
+"collectible": SubResource("Animation_4trkl")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lewe7"]
+radius = 8.0
+
+[node name="Collectible" type="Node2D"]
+script = ExtResource("1_j7jet")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0uw1x")
+}
+autoplay = "collectible"
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_lewe7")
+
+[node name="Texture" type="Sprite2D" parent="Area"]
+texture = ExtResource("2_aqqmh")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Area" to="." method="_on_body_entered"]

@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://8l0jgat4v2oa"]
+
+[ext_resource type="Theme" uid="uid://chydmyy0v7xmu" path="res://assets/theme.tres" id="1_u0ogx"]
+[ext_resource type="Script" path="res://scripts/title.gd" id="2_wvvxf"]
+[ext_resource type="Texture2D" uid="uid://bixv0dhfwbblm" path="res://assets/sample.png" id="3_4ofdc"]
+[ext_resource type="PackedScene" uid="uid://yit4vv8vyjau" path="res://scenes/credits.tscn" id="3_dby5v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_52qie"]
+font_size = 132
+
+[sub_resource type="Animation" id="Animation_allu4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ev3id"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4hdmh"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wla3a"]
+_data = {
+"RESET": SubResource("Animation_allu4"),
+"fade_in": SubResource("Animation_ev3id"),
+"fade_out": SubResource("Animation_4hdmh")
+}
+
+[node name="Title" type="CanvasLayer"]
+layer = 2
+script = ExtResource("2_wvvxf")
+
+[node name="Title" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u0ogx")
+
+[node name="ColorRect" type="ColorRect" parent="Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sample" type="Sprite2D" parent="Title"]
+position = Vector2(571, 319.5)
+scale = Vector2(0.624602, 0.651675)
+texture = ExtResource("3_4ofdc")
+region_enabled = true
+region_rect = Rect2(0, 0, 1886.05, 1045.38)
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 2.0
+offset_bottom = 198.0
+grow_horizontal = 2
+text = "Twilight Trials"
+label_settings = SubResource("LabelSettings_52qie")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -107.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Credits" type="Button" parent="Title/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Credits" parent="." instance=ExtResource("3_dby5v")]
+visible = false
+
+[node name="FadeToBlack" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlack"]
+libraries = {
+"": SubResource("AnimationLibrary_wla3a")
+}
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="pressed" from="Title/MarginContainer/HBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Title/MarginContainer/HBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Title/MarginContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="animation_finished" from="FadeToBlack/AnimationPlayer" to="." method="_on_fade_finished"]
+[connection signal="timeout" from="QueueFreeTimer" to="." method="_on_queue_free_timer_timeout"]

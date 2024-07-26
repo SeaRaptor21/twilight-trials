@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://d261dafgp5834"]
+
+[ext_resource type="Script" path="res://scripts/shadow.gd" id="1_wdrmq"]
+[ext_resource type="Texture2D" uid="uid://chgw77ps52j33" path="res://assets/shadows/generic_0.png" id="2_5il4x"]
+[ext_resource type="Texture2D" uid="uid://jpiywefblwx1" path="res://assets/shadows/generic_1.png" id="3_yaq2b"]
+[ext_resource type="Texture2D" uid="uid://cspqlp4i7byju" path="res://assets/shadows/generic_2.png" id="4_diqe4"]
+[ext_resource type="Texture2D" uid="uid://c8ehbtulomjbg" path="res://assets/shadows/generic_3.png" id="5_dr4h3"]
+[ext_resource type="Texture2D" uid="uid://cgeoi1mcudlvj" path="res://assets/shadows/generic_4.png" id="6_ugan0"]
+[ext_resource type="Texture2D" uid="uid://buhhw0iqbvj5b" path="res://assets/shadows/generic_5.png" id="7_73dw1"]
+
+[sub_resource type="Animation" id="Animation_0wdv7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_5il4x")]
+}
+
+[sub_resource type="Animation" id="Animation_02b7r"]
+resource_name = "shadow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_5il4x"), ExtResource("3_yaq2b"), ExtResource("4_diqe4"), ExtResource("5_dr4h3"), ExtResource("6_ugan0"), ExtResource("7_73dw1")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tte6x"]
+_data = {
+"RESET": SubResource("Animation_0wdv7"),
+"shadow": SubResource("Animation_02b7r")
+}
+
+[node name="Shadow" type="Node2D"]
+script = ExtResource("1_wdrmq")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("2_5il4x")
+
+[node name="Overlay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tte6x")
+}
+autoplay = "shadow"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+border_color = Color(1, 1, 1, 1)
+border_width = 0.5

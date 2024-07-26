@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb70vjddjoos4"]
+
+[ext_resource type="Theme" uid="uid://chydmyy0v7xmu" path="res://assets/theme.tres" id="1_glymb"]
+[ext_resource type="Script" path="res://scripts/inventory_item.gd" id="2_xe0l7"]
+
+[node name="InventoryItem" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 30)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 6
+theme = ExtResource("1_glymb")
+script = ExtResource("2_xe0l7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Amount" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "1x"
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Name"

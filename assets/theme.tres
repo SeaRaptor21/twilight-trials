@@ -1,0 +1,112 @@
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://chydmyy0v7xmu"]
+
+[ext_resource type="FontFile" uid="uid://d3fv8fs8o0t0l" path="res://assets/tiny-5-font/Tiny5-Regular.ttf" id="1_hk14g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kjug6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sk27i"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpjdy"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8gsa"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_s05f0"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2rfiq"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_u25kd"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1ji6"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy1h"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7poj4"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_k3w6v"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xtgn2"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_uj6ml"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+vertical = true
+
+[resource]
+default_font = ExtResource("1_hk14g")
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxEmpty_kjug6")
+Button/styles/hover = SubResource("StyleBoxFlat_sk27i")
+Button/styles/normal = SubResource("StyleBoxFlat_vpjdy")
+Button/styles/pressed = SubResource("StyleBoxFlat_b8gsa")
+HBoxContainer/constants/separation = 15
+HScrollBar/styles/grabber = SubResource("StyleBoxLine_s05f0")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_2rfiq")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_u25kd")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_r1ji6")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_4hy1h")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_7poj4")
+VBoxContainer/constants/separation = 15
+VScrollBar/styles/grabber = SubResource("StyleBoxLine_k3w6v")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_xtgn2")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_uj6ml")
