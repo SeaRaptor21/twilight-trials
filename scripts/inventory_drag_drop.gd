@@ -17,29 +17,29 @@ func _can_drop_data(pos, data):
 		move_child(data.ref, closest_idx)
 	return true
 
-func _drop_data(_pos, data):
-	data.ref.modulate.a = 1.0
-	#print(name)
-	var hb = []
-	for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Hotbar").get_children():
-		hb.append({"id": c.id,"amount": c.amount})
-	Game.hotbar = hb
-	var inv = []
-	for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
-		inv.append({"id": c.id,"amount": c.amount})
-	Game.inventory = inv
-	Main.refresh_inventory()
+#func _drop_data(_pos, data):
+	#data.ref.modulate.a = 1.0
+	##print(name)
+	#var hb = []
+	#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Hotbar").get_children():
+		#hb.append({"id": c.id,"amount": c.amount})
+	#Game.hotbar = hb
+	#var inv = []
+	#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
+		#inv.append({"id": c.id,"amount": c.amount})
+	#Game.inventory = inv
+	#Main.refresh_inventory()
 
-#func _unhandled_input(event):
-	#if event is InputEventMouseButton and not event.pressed:
-		#for c in get_children():
-			#c.modulate.a = 1.0
-		#var hb = []
-		#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Hotbar").get_children():
-			#hb.append({"id": c.id,"amount": c.amount})
-		#Game.hotbar = hb
-		#var inv = []
-		#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
-			#inv.append({"id": c.id,"amount": c.amount})
-		#Game.inventory = inv
-		#Main.refresh_inventory()
+func _input(event):
+	if event is InputEventMouseButton and not event.pressed:
+		for c in get_children():
+			c.modulate.a = 1.0
+		var hb = []
+		for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Hotbar").get_children():
+			hb.append({"id": c.id,"amount": c.amount})
+		Game.hotbar = hb
+		var inv = []
+		for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
+			inv.append({"id": c.id,"amount": c.amount})
+		Game.inventory = inv
+		Main.update_hotbar()

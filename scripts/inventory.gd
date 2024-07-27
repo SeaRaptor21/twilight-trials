@@ -24,3 +24,18 @@ func _on_line_edit_text_changed(new_text):
 func _on_close_pressed():
 	visible = false
 	get_tree().paused = false
+
+#func _can_drop_data(_pos, data):
+	#return data is Dictionary and data.has_all(["id","amount","ref"])
+
+#func _drop_data(_pos, data):
+	#data.ref.modulate.a = 1.0
+	#var hb = []
+	#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Hotbar").get_children():
+		#hb.append({"id": c.id,"amount": c.amount})
+	#Game.hotbar = hb
+	#var inv = []
+	#for c in get_node("/root/Main/CanvasLayer/Inventory/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
+		#inv.append({"id": c.id,"amount": c.amount})
+	#Game.inventory = inv
+	#Main.refresh_inventory()
